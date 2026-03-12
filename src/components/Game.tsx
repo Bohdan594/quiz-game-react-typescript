@@ -2,7 +2,7 @@ import './Game.scss';
 import AnswerOption from './AnswerOption.tsx';
 import Result from './Result.tsx';
 
-const question =     {
+const question = {
     "category": "Science: Gadgets",
     "type": "multiple",
     "difficulty": "easy",
