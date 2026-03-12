@@ -1,10 +1,8 @@
-
-import './App.scss'
+import './App.scss';
 import Score from './components/Score.tsx';
 import Game from './components/Game.tsx';
 
 function App() {
-
 
   return (
     <>
