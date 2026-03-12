@@ -11,6 +11,7 @@ const initialState : QuizState = {
 const QuizContext = createContext<QuizState>(initialState);
 
 export function QuizProvider({children} : {children: React.ReactElement}){
+
     const [state, setState] = useState(initialState);
 
     return (
@@ -18,6 +19,7 @@ export function QuizProvider({children} : {children: React.ReactElement}){
             {children}
         </QuizContext.Provider>
     );
+    
 };
 
 export function useQuiz(){
