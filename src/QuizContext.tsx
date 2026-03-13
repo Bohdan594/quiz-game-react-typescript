@@ -2,6 +2,11 @@ import { createContext, useContext, useReducer } from 'react';
 
 // Interfaces and types for states
 
+interface QuizContext {
+    state: QuizState,
+    dispatch: React.Dispatch<QuizAction>
+}
+
 type Status = "idle" | "fetching" | "ready";
 
 interface QuizState {
@@ -21,7 +26,10 @@ const initialState : QuizState = {
 
 // Contexts for states
 
-const QuizContext = createContext<QuizState>(initialState);
+const QuizContext = createContext<QuizContext>({
+    state: initialState,
+    dispatch: () => null
+});
 
 // Provider
 
@@ -30,7 +38,7 @@ export function QuizProvider({children} : {children: React.ReactNode}){
     const [state, dispatch] = useReducer(QuizReducer, initialState);
 
     return (
-        <QuizContext.Provider value={state}>
+        <QuizContext.Provider value={{state, dispatch}}>
             {children}
         </QuizContext.Provider>
     );
