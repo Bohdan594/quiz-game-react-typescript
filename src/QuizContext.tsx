@@ -30,13 +30,16 @@ interface QuizContext {
 type Status = "idle" | "fetching" | "ready" | "error";
 
 interface QuizState {
+    question: Question | null,
     gameStatus: Status
 };
 
 type QuizAction =
-    { type: "setStatus"; payload: Status }
+    | { type: "setStatus"; payload: Status }
+    | { type: "setQuestion"; payload: Question }
 
 const initialState : QuizState = {
+    question: null,
     gameStatus: "idle"
 };
 
@@ -69,6 +72,8 @@ export function useQuiz(){
 
 function QuizReducer(state: QuizState, action: QuizAction): QuizState {
   switch (action.type) {
+    case "setQuestion":
+      return {...state, question: action.payload};
     case "setStatus":
       return {...state, gameStatus: action.payload};
     default:

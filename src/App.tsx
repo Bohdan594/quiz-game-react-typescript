@@ -19,6 +19,7 @@ function App() {
         let question : Question = data.results[0];
         dispatch({type: "setStatus", payload: "ready"});
         console.log(question);
+        dispatch({type: "setQuestion", payload: question});
       } else {
         dispatch({type: "setStatus", payload: "error"});
       }
