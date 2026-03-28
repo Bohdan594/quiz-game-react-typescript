@@ -22,16 +22,16 @@ export interface QuestionsResponse {
 
 // Interfaces and types for STATUS
 
-interface QuizContext {
-    state: QuizState,
-    dispatch: React.Dispatch<QuizAction>
-}
-
 type Status = "idle" | "fetching" | "ready" | "error";
 
 interface QuizState {
     question: Question | null,
     gameStatus: Status
+};
+
+interface QuizContext {
+    state: QuizState,
+    dispatch: React.Dispatch<QuizAction>
 };
 
 type QuizAction =
