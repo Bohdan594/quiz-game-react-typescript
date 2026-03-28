@@ -20,7 +20,7 @@ export interface QuestionsResponse {
   results: Question[];
 }
 
-// Interfaces and types for STATUS
+// Interfaces and types for ALL
 
 type Status = "idle" | "fetching" | "ready" | "error";
 
