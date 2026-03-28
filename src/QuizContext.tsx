@@ -29,11 +29,6 @@ interface QuizState {
     gameStatus: Status
 };
 
-interface QuizContext {
-    state: QuizState,
-    dispatch: React.Dispatch<QuizAction>
-};
-
 type QuizAction =
     | { type: "setStatus"; payload: Status }
     | { type: "setQuestion"; payload: Question }
@@ -41,6 +36,11 @@ type QuizAction =
 const initialState : QuizState = {
     question: null,
     gameStatus: "idle"
+};
+
+interface QuizContext {
+    state: QuizState,
+    dispatch: React.Dispatch<QuizAction>
 };
 
 const QuizContext = createContext<QuizContext>({
