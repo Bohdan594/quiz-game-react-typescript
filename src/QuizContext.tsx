@@ -29,14 +29,14 @@ interface QuizState {
     gameStatus: Status
 };
 
-type QuizAction =
-    | { type: "setStatus"; payload: Status }
-    | { type: "setQuestion"; payload: Question }
-
 const initialState : QuizState = {
     question: null,
     gameStatus: "idle"
 };
+
+type QuizAction =
+    | { type: "setStatus"; payload: Status }
+    | { type: "setQuestion"; payload: Question }
 
 interface QuizContext {
     state: QuizState,
