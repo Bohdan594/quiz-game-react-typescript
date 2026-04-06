@@ -55,17 +55,29 @@ function App() {
     }
   });
 
-  return (
-    <>
-      {
-        state.gameStatus === 'fetching' ?
-          <Loader/> : state.gameStatus === 'error' ?
-          <p>Error...</p> : state.gameStatus === 'ready' ?
+  const renderContent = () => {
+    switch (state.gameStatus) {
+      case 'fetching':
+        return <Loader />;
+      case 'error':
+        return <p>Error...</p>;
+      case 'ready':
+      case 'answered':
+        return (
           <>
             <Score />
             <Game />
-          </> :
-          null
+          </>
+        );
+      default:
+        return null;
+    }
+  }
+
+  return (
+    <>
+      {
+        renderContent()
       }
     </>
   )

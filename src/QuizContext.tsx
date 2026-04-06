@@ -22,21 +22,24 @@ export interface QuestionsResponse {
 
 // Interfaces and types for ALL
 
-type Status = "idle" | "fetching" | "ready" | "error";
+type Status = "idle" | "fetching" | "ready" | "error" | "answered";
 
 interface QuizState {
     question: Question | null,
-    gameStatus: Status
+    gameStatus: Status,
+    userAnswer: string | null
 };
 
 const initialState : QuizState = {
     question: null,
-    gameStatus: "idle"
+    gameStatus: "idle",
+    userAnswer: null
 };
 
 type QuizAction =
     | { type: "setStatus"; payload: Status }
     | { type: "setQuestion"; payload: Question }
+    | { type: "setUserAnswer"; payload: string }
 
 interface QuizContext {
     state: QuizState,
@@ -76,6 +79,8 @@ function QuizReducer(state: QuizState, action: QuizAction): QuizState {
       return {...state, question: action.payload};
     case "setStatus":
       return {...state, gameStatus: action.payload};
+    case "setUserAnswer":
+      return {...state, userAnswer: action.payload};
     default:
       throw new Error("Unknown action");
   }
