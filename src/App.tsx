@@ -21,6 +21,8 @@ function App() {
 
   async function fetchQuestion(){
 
+    dispatch({type: "setUserAnswer", payload: null});
+
     try{
 
       dispatch({type: "setStatus", payload: "fetching"});

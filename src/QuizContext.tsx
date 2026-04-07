@@ -39,7 +39,7 @@ const initialState : QuizState = {
 type QuizAction =
     | { type: "setStatus"; payload: Status }
     | { type: "setQuestion"; payload: Question }
-    | { type: "setUserAnswer"; payload: string }
+    | { type: "setUserAnswer"; payload: string | null }
 
 interface QuizContext {
     state: QuizState,

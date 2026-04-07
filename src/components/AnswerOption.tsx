@@ -12,7 +12,11 @@ function AnswerOption({answer}: {answer : string}) {
             {
                 answer &&
                 <div className="answer-option">
-                    <p className={state.userAnswer === answer ? "selected" : ""} onClick={() => {dispatch({type: "setUserAnswer", payload: answer})}}> 
+                    <p className={`
+                        ${state.userAnswer === answer ? "selected" : ""}
+                        ${state.gameStatus === 'answered' && state.question?.correct_answer === answer ? "correct" : ""}
+                    `}
+                    onClick={() => {dispatch({type: "setUserAnswer", payload: answer})}}> 
                        {decode(answer)}
                     </p>
                 </div>
