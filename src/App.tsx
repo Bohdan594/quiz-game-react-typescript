@@ -21,11 +21,10 @@ function App() {
 
   async function fetchQuestion(){
 
-    dispatch({type: "setUserAnswer", payload: null});
-
     try{
 
       dispatch({type: "setStatus", payload: "fetching"});
+      dispatch({type: "setUserAnswer", payload: null});
       const response = await fetch('https://opentdb.com/api.php?amount=1&category=18');
       let data : QuestionsResponse = await(response.json());
 

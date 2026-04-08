@@ -20,6 +20,11 @@ export interface QuestionsResponse {
   results: Question[];
 }
 
+interface Score {
+  correct: number, 
+  incorrect: number
+}
+
 // Interfaces and types for ALL
 
 type Status = "idle" | "fetching" | "ready" | "error" | "answered";
@@ -27,19 +32,22 @@ type Status = "idle" | "fetching" | "ready" | "error" | "answered";
 interface QuizState {
     question: Question | null,
     gameStatus: Status,
-    userAnswer: string | null
+    userAnswer: string | null,
+    score: Score
 };
 
 const initialState : QuizState = {
     question: null,
     gameStatus: "idle",
-    userAnswer: null
+    userAnswer: null,
+    score: {correct: 0, incorrect: 0}
 };
 
 type QuizAction =
     | { type: "setStatus"; payload: Status }
     | { type: "setQuestion"; payload: Question }
     | { type: "setUserAnswer"; payload: string | null }
+    | { type: "setScore"; payload: "correct" | "incorrect" }
 
 interface QuizContext {
     state: QuizState,
@@ -81,6 +89,10 @@ function QuizReducer(state: QuizState, action: QuizAction): QuizState {
       return {...state, gameStatus: action.payload};
     case "setUserAnswer":
       return {...state, userAnswer: action.payload};
+    case "setScore":
+      let score = state.score;
+      score[action.payload] += 1;
+      return {...state, score: score};
     default:
       throw new Error("Unknown action");
   }
