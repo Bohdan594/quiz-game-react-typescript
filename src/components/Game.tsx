@@ -3,17 +3,25 @@ import AnswerOption from './AnswerOption.tsx';
 import Result from './Result.tsx';
 import { useQuiz } from '../QuizContext.tsx';
 import {decode} from 'html-entities';
+// @ts-ignore
+import confetti from "https://cdn.skypack.dev/canvas-confetti";
 
 function Game() {
 
     const {state, dispatch} = useQuiz();
 
+    let wonAudio = new Audio('./sounds/won.wav');
+    let lostAudio = new Audio('./sounds/lost.wav');
+
     const handleSubmit = () => {
         dispatch({type: "setStatus", payload: "answered"});
         if (state.userAnswer === state.question?.correct_answer) {
             dispatch({type: "setScore", payload: "correct"});
+            wonAudio.play();
+            confetti();
         } else {
             dispatch({type: "setScore", payload: "incorrect"});
+            lostAudio.play();
         }
     }
     
