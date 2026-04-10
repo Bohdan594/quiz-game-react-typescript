@@ -17,18 +17,22 @@ function Game() {
         dispatch({type: "setStatus", payload: "answered"});
         if (state.userAnswer === state.question?.correct_answer) {
             dispatch({type: "setScore", payload: "correct"});
-            wonAudio.play();
-            confetti();
+            if (state.effects) {
+                wonAudio.play(); 
+                confetti(); 
+            } 
         } else {
             dispatch({type: "setScore", payload: "incorrect"});
-            lostAudio.play();
+            if (state.effects) {
+                lostAudio.play(); 
+            }
         }
     }
     
     return (
         <>
             <div className="container game-screen">
-                <h2>Question</h2>
+                <h3>Question {state.effects ? <i onClick={() => dispatch({type: "setEffects", payload: false})} className="fa-solid fa-star"></i> : <i onClick={() => dispatch({type: "setEffects", payload: true})} className="fa-regular fa-star"></i>}</h3>
                 <h4>{decode(state.question?.question)}</h4>
                 <div className="options">
                     {state.question?.incorrect_answers.map((answer) => {
@@ -48,7 +52,6 @@ function Game() {
                         <button onClick={() => {dispatch({type: "setStatus", payload: "idle"})}}>Next Question</button>
                     </>   
                 }
-                
             </div>
             
         </>

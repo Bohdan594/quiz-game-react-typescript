@@ -21,4 +21,10 @@
             color: var(--incorrect)
         }
     }
+
+    h3{
+        .fa-star{
+            cursor: pointer;
+        }
+    }
 }

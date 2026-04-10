@@ -33,14 +33,16 @@ interface QuizState {
     question: Question | null,
     gameStatus: Status,
     userAnswer: string | null,
-    score: Score
+    score: Score,
+    effects: boolean
 };
 
 const initialState : QuizState = {
     question: null,
     gameStatus: "idle",
     userAnswer: null,
-    score: {correct: 0, incorrect: 0}
+    score: {correct: 0, incorrect: 0},
+    effects: false
 };
 
 type QuizAction =
@@ -48,6 +50,7 @@ type QuizAction =
     | { type: "setQuestion"; payload: Question }
     | { type: "setUserAnswer"; payload: string | null }
     | { type: "setScore"; payload: "correct" | "incorrect" }
+    | { type: "setEffects"; payload: boolean }
 
 interface QuizContext {
     state: QuizState,
@@ -93,6 +96,8 @@ function QuizReducer(state: QuizState, action: QuizAction): QuizState {
       let score = state.score;
       score[action.payload] += 1;
       return {...state, score: score};
+    case "setEffects":
+      return {...state, effects: action.payload};
     default:
       throw new Error("Unknown action");
   }
